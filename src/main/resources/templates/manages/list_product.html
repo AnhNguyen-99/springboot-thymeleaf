@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>List Product</title>
+<style type="text/css">
+	td{
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+<div id="wrapper">
+		<div th:replace="/manages/menu"></div>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">List</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Danh sách sản phẩm</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-hover">
+										<thead>
+											<tr style="font-weight: bold;">
+												<td>Mã sản phẩm</td>
+												<td>Ảnh sản phẩm</td>
+												<td>Tên danh mục</td>
+												<td>Tên NSX</td>
+												<td>Tên sản phẩm</td>
+												<td>Giá</td>
+												<td>Khuyến mại</td>
+												<td>Ngày tạo</td>
+												<td>Lựa chọn</td>
+											</tr>
+										</thead>
+										<tbody id="listProduct">
+												
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>				
+				</div>				
+			</div>			
+		</div>
+	</div>
+	
+	<script th:src="@{/manages/js/jquery.min.js}"></script>
+	<script th:src="@{/manages/js/bootstrap.min.js}"></script>
+	<script th:src="@{/manages/js/metisMenu.min.js}"></script>
+	<script th:src="@{/manages/js/startmin.js}"></script>
+   
+    <script type="text/javascript">
+		var product = {};
+	    $(document).ready(function () {
+	    	
+	    	product.findAll = function() {
+	    		$.ajax({
+		    		url: "http://localhost:8080/api/product",
+		    		type: "GET",
+		    		success: function (result) {
+		    			console.log(result);
+		    			result.forEach((item) =>{
+		    				$('#listProduct').append(`<tr><td>${item.productId}</td>
+		    						<td><img src='/manages/image/product/${item.productImage}' style='width: 100px; height: 100px;'></td>
+									<td>${item.productName}</td>
+									<td>${item.categoryId}</td>
+									<td>${item.producerId}</td>
+									<td>${item.productPrice}VNĐ</td>
+									<td>${item.productSale}%</td>
+									<td>${item.createDate}</td>
+									<td>
+									<a class='btn btn-default' href='edit/${item.productId}'><i class='fa fa-edit'></i></a>
+		                            <p class='btn btn-default' id='btnDelete' data-productId=${item.productId}><i class='fa fa-trash'></i></p>
+								</td>
+							</tr>`);
+		    			});
+		    		}
+	    		});
+			}
+
+	    	product.findAll();
+
+	    });
+    </script>
+    
+</body>
+</html>

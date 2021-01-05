@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Form product</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div th:replace="/manages/menu"></div>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">Forms</h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Tạo sản phẩm mới</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-12">
+										<!-- Form tạo danh mục -->
+										<form method="POST" enctype="multipart/form-data">
+											<!-- productId -->
+											<!-- Danh mục -->
+											<div class="form-group">
+												<label>Danh mục</label>
+												<select class="form-control" id="listCategory"></select>
+											</div>
+
+											<!-- NSX -->
+											<div class="form-group">
+												<label>NSX</label>
+												<select class="form-control" id="listProducer">
+													<!-- <option th:each="producer:${listProducer}" th:value="${producer.producerId}" th:utext="${producer.producerName}"/> -->
+												</select>
+											</div>
+
+											<!-- Tên sản phẩm -->
+											<div class="form-group">
+												<label>Tên sản phẩm</label> <input class="form-control"	type="text" />
+											</div>
+
+											<!-- Ảnh -->
+											<div class="form-group">
+												<label>Ảnh sản phẩm</label> <input type="file"
+													class="form-control" />
+											</div>
+
+											<!-- Giá -->
+											<div class="form-group">
+												<label>Giá</label> <input class="form-control" type="number" />
+											</div>
+
+											<!-- Khuyến mại -->
+											<div class="form-group">
+												<label>Khuyến mại</label> <input class="form-control"
+													type="number" />
+											</div>
+
+											<!-- Nội dung -->
+											<div class="form-group">
+												<label>Nội dung</label>
+												<textarea rows="10px" cols="" class="form-control"></textarea>
+											</div>
+
+											<div class="form-group">
+												<input type="submit" class="btn btn-primary" value="Lưu">
+												<input type="reset" class="btn btn-default" value="Hủy">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/manages/js/jquery.min.js}"></script>
+	<script th:src="@{/manages/js/bootstrap.min.js}"></script>
+	<script th:src="@{/manages/js/metisMenu.min.js}"></script>
+	<script th:src="@{/manages/js/startmin.js}"></script>
+	
+	<script type="text/javascript">
+		var producer = {};
+	    $(document).ready(function () {
+	    	
+	    	producer.findAll = function() {
+	    		$.ajax({
+		    		url: "http://localhost:8080/api/producer",
+		    		type: "GET",
+		    		success: function (result) {
+		    			result.forEach((item) =>{
+		    				$('#listProducer').append(`<option value='${item.producerId}'>${item.producerName}</option>`);
+		    			});
+		    		}
+	    		});
+			}
+	    	producer.findAll();
+	    });
+	</script>
+	
+	<script type="text/javascript">
+		var category = {};
+	    $(document).ready(function () {
+	    	
+	    	category.findAll = function() {
+	    		$.ajax({
+		    		url: "http://localhost:8080/api/category",
+		    		type: "GET",
+		    		success: function (result) {
+		    			result.forEach((item) =>{
+		    				$('#listCategory').append(`<option value='${item.categoryId}'>${item.categoryName}</option>`);
+		    			});
+		    		}
+	    		});
+			}
+	    	category.findAll();
+	    });
+	</script>
+</body>
+</html>

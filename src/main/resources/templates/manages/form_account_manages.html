@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Form Account Manages</title>
+</head>
+<body>
+<div id="wrapper">
+		<div th:replace="/manages/menu"></div>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Forms</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Tạo tài khoản quản trị
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <!-- Form tạo danh mục -->
+                                        <form method="POST" >
+                                            <!-- Chọn quyền -->
+
+                                            <!-- accountName -->
+                                            <div class="form-group">
+                                                <label>Tên tài khoản</label>
+                                                <input class="form-control" type="text" name="accountName"/>
+                                            </div>
+
+                                            <!-- fullName -->
+                                            <div class="form-group">
+                                                <label>Họ và tên</label>
+                                                <input class="form-control" type="text" name="fullName"/>
+                                            </div>
+
+                                            <!-- accountMail -->
+                                            <div class="form-group">
+                                                <label>Mail</label>
+                                                <input class="form-control" type="email" name="accountMail"/>
+                                            </div>
+
+                                            <!-- address -->
+                                            <div class="form-group">
+                                                <label>Địa chỉ</label>
+                                                <input class="form-control" type="text" name="address"/>
+                                            </div>
+
+                                            <!-- SĐT -->
+                                            <div class="form-group">
+                                                <label>SĐT</label>
+                                                <input class="form-control" type="text" name="moblie"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-primary" name="create_account" value="Lưu">
+                                               	<input type="reset" class="btn btn-default" name="xoa" value="Hủy">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/manages/js/jquery.min.js}"></script>
+	<script th:src="@{/manages/js/bootstrap.min.js}"></script>
+	<script th:src="@{/manages/js/metisMenu.min.js}"></script>
+	<script th:src="@{/manages/js/startmin.js}"></script>
+
+</body>
+</html>

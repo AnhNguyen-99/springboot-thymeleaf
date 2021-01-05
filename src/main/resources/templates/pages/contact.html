@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Contact</title>
+</head>
+<body>
+	<div class="colorlib-loader"></div>
+	<div th:replace="/pages/header"></div>
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<p class="bread">
+						<span><a href="/home">Home</a></span> / <span>Contact</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="colorlib-contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Contact Information</h3>
+					<div class="row contact-info-wrap">
+						<div class="col-md-3">
+							<p>
+								<span><i class="icon-location"></i></span> 198 West 21th Street,
+								<br> Suite 721 New York NY 10016
+							</p>
+						</div>
+						<div class="col-md-3">
+							<p>
+								<span><i class="icon-phone3"></i></span> <a href="#">0987654321</a>
+							</p>
+						</div>
+						<div class="col-md-3">
+							<p>
+								<span><i class="icon-paperplane"></i></span> <a
+									href="mailto:myshop.com">myshop@gmail.com</a>
+							</p>
+						</div>
+						<div class="col-md-3">
+							<p>
+								<span><i class="icon-globe"></i></span> <a href="#">myshop.com</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="contact-wrap">
+						<h3>FeedBack</h3>
+						<form id="addFeedBack" method="POST">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Name</label>
+										<input type="text" class="form-control"	placeholder="Fullname" id="username" />
+									</div>
+								</div>
+								<div class="w-100"></div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="email">Email</label>
+										<input class="form-control"	placeholder="Your email address" id="email" type="text"/>
+									</div>
+								</div>
+								<div class="w-100"></div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="subject">Phone</label>
+										<input class="form-control"	placeholder="Your phonenumber" id="mobile" type="text"/>
+									</div>
+								</div>
+								<div class="w-100"></div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="subject">Adderss</label>
+										<input class="form-control" placeholder="Your Address" id="address" type="text"/>
+									</div>
+								</div>
+								<div class="w-100"></div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="message">Content</label>
+										<textarea name="message" id="content" cols="30" rows="10" class="form-control" placeholder="Content"></textarea>
+									</div>
+								</div>
+								<div class="w-100"></div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<input id="btnAdd" type="submit" value="Send" class="btn btn-primary">
+									</div>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+				<div class="col-md-6">
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.533015535477!2d105.79900461440776!3d21.051363292383446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab23c03cd9db%3A0x74afa04dd6e787e5!2sApartment%20Ecolife%20Tay%20Ho!5e0!3m2!1sen!2s!4v1595168832428!5m2!1sen!2s"
+						width="600" height="800" style="border: 0;" aria-hidden="false"
+						tabindex="0"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="/pages/footer"></div>
+	
+	<script type="text/javascript">
+		$('#btnAdd').click(function (e) {
+		    e.preventDefault();
+		    var data = {
+		    	"username": $("#username").val(),
+		    	"mobile": $("#mobile").val(),
+		    	"email": $("#email").val(),
+		    	"address": $("#address").val(),
+		    	"content": $("#content").val()
+		    };
+		    console.log("data", data);
+		    var formData = $('#addFeedBack').serializeArray();
+		    addFeedBack(data);
+		});
+		
+		function addFeedBack(data) {
+			$.ajax({
+	            url: 'http://localhost:8080/api/feedback',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            dataType: 'json',
+	            success: function (result) {
+	            	alert("Thành công");
+	            },
+	            error: function (error) {
+	            	console.log(error);
+	            	alert("Thất bại");
+	            }
+	        });
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Manages</title>
+</head>
+<body>
+	<div id="wrapper">
+		<div th:replace="/manages/menu"></div>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header"><i class="fa fa-home"></i> Home</h1>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-comments fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge"><span id="total_feedback">5</span></div>
+										<div>FeedBack</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="/manages/feedback/list"> <span class="pull-left">View Details</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-green">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-tasks fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge">12</div>
+										<div>New Tasks!</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="#"> <span class="pull-left">View Details</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-yellow">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-shopping-cart fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge" id="total_order">124</div>
+										<div>Orders</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="/manages/order/list"> <span class="pull-left">View Details</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="panel panel-red">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-users fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<div class="huge" id="total_account">13</div>
+										<div>Account</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+								<a href="#"> <span class="pull-left">View Details</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								</a>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script th:src="@{/manages/js/jquery.min.js}"></script>
+	<script th:src="@{/manages/js/bootstrap.min.js}"></script>
+	<script th:src="@{/manages/js/metisMenu.min.js}"></script>
+	<script th:src="@{/manages/js/startmin.js}"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+	        $.ajax({
+	            url : "http://localhost:8080/api/feedback/totalrecord",
+	            type: "GET",
+	            beforeSend: function(xhr){
+	                xhr.setRequestHeader("Accept" , "application/json");
+	                xhr.setRequestHeader("Content-Type" , "application/json");
+	            },
+	            success: function(result){
+	               $("#total_feedback").text(result);
+	            },
+	            error: function (jqXHR, textStatus, errorThrown) {
+	                console.log("Error: ");
+	            }
+	        })
+		});	
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+	        $.ajax({
+	            url : "http://localhost:8080/api/order/totalrecord",
+	            type: "GET",
+	            beforeSend: function(xhr){
+	                xhr.setRequestHeader("Accept" , "application/json");
+	                xhr.setRequestHeader("Content-Type" , "application/json");
+	            },
+	            success: function(result){
+	               $("#total_order").text(result);
+	            },
+	            error: function (jqXHR, textStatus, errorThrown) {
+	                console.log("Error: ");
+	            }
+	        })
+		});	
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+	        $.ajax({
+	            url : "http://localhost:8080/api/account/totalrecord",
+	            type: "GET",
+	            beforeSend: function(xhr){
+	                xhr.setRequestHeader("Accept" , "application/json");
+	                xhr.setRequestHeader("Content-Type" , "application/json");
+	            },
+	            success: function(result){
+	               $("#total_account").text(result);
+	            },
+	            error: function (jqXHR, textStatus, errorThrown) {
+	                console.log("Error: ");
+	            }
+	        })
+		});	
+	</script>
+</body>
+</html>
